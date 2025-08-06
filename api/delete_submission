@@ -1,0 +1,54 @@
+<?php
+header('Content-Type: application/json');
+session_start();
+
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require 'c.php';  // Assuming c.php properly sets up $conn with new mysqli(...)
+
+if ($conn->connect_error) {
+    error_log("Connection failed: " . $conn->connect_error);
+    die(json_encode(['success' => false, 'message' => 'Connection failed: ' . $conn->connect_error]));
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $submissionId = filter_input(INPUT_POST, 'submissionId', FILTER_VALIDATE_INT);
+
+    if (!$submissionId) {
+        error_log("Invalid or missing submission ID.");
+        echo json_encode(['success' => false, 'message' => 'Valid submission ID is required.']);
+        exit();
+    }
+
+    if (!isset($_SESSION['user_id'])) {
+        error_log("User session missing.");
+        echo json_encode(['success' => false, 'message' => 'User session is required.']);
+        exit();
+    }
+
+    $userId = $_SESSION['user_id'];
+    $stmt = $conn->prepare('DELETE FROM submissions WHERE sid = ? AND owner = ?');
+    if ($stmt) {
+        $stmt->bind_param('ii', $submissionId, $userId);
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'Submission deleted successfully.']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'No submission found or permission denied.']);
+            }
+        } else {
+            error_log("SQL error: " . $stmt->error);
+            echo json_encode(['success' => false, 'message' => 'Failed to execute delete operation.']);
+        }
+        $stmt->close();
+    } else {
+        error_log("SQL prepare error: " . $conn->error);
+        echo json_encode(['success' => false, 'message' => 'Failed to prepare SQL statement.']);
+    }
+    $conn->close();
+} else {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+}
+?>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Syllabus Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Course Syllabus Generator</h1>
+            <p>Fill in the form below to generate a professional course syllabus</p>
+        </header>
+
+        <main>
+            <div class="form-container">
+                <form id="syllabusForm">
+                    <div class="form-section">
+                        <h2>Basic Information</h2>
+                        <div class="form-group">
+                            <label for="courseTitle">Course Title <span class="required">*</span></label>
+                            <input type="text" id="courseTitle" name="courseTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseCode">Course Code</label>
+                            <input type="text" id="courseCode" name="courseCode">
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester/Term <span class="required">*</span></label>
+                            <input type="text" id="semester" name="semester" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="academicYear">Academic Year <span class="required">*</span></label>
+                            <input type="text" id="academicYear" name="academicYear" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Instructor Information</h2>
+                        <div class="form-group">
+                            <label for="instructorName">Instructor Name <span class="required">*</span></label>
+                            <input type="text" id="instructorName" name="instructorName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="instructorEmail">Email</label>
+                            <input type="email" id="instructorEmail" name="instructorEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="officeHours">Office Hours</label>
+                            <input type="text" id="officeHours" name="officeHours">
+                        </div>
+                        <div class="form-group">
+                            <label for="officeLocation">Office Location</label>
+                            <input type="text" id="officeLocation" name="officeLocation">
+                        </div>
+                        <div class="form-group">
+                            <label for="taName">Teaching Assistant (TA) Name</label>
+                            <input type="text" id="taName" name="taName">
+                        </div>
+                        <div class="form-group">
+                            <label for="taEmail">TA Email</label>
+                            <input type="email" id="taEmail" name="taEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="taOfficeHours">TA Office Hours</label>
+                            <input type="text" id="taOfficeHours" name="taOfficeHours">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Course Details</h2>
+                        <div class="form-group">
+                            <label for="courseDescription">Course Description <span class="required">*</span></label>
+                            <textarea id="courseDescription" name="courseDescription" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseObjectives">Course Objectives</label>
+                            <textarea id="courseObjectives" name="courseObjectives" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="requiredMaterials">Required Materials</label>
+                            <textarea id="requiredMaterials" name="requiredMaterials" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recommendedMaterials">Recommended Materials</label>
+                            <textarea id="recommendedMaterials" name="recommendedMaterials" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="prerequisites">Prerequisites</label>
+                            <input type="text" id="prerequisites" name="prerequisites">
+                        </div>
+                        <div class="form-group">
+                            <label for="courseCredits">Course Credits</label>
+                            <input type="number" id="courseCredits" name="courseCredits" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="classroomLocation">Classroom Location/Mode</label>
+                            <input type="text" id="classroomLocation" name="classroomLocation" placeholder="e.g., Room 101 / Online / Hybrid">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Course Schedule</h2>
+                        <div id="scheduleContainer">
+                            <div class="schedule-item">
+                                <div class="form-group">
+                                    <label for="week1">Week 1</label>
+                                    <input type="text" id="week1" name="week1" placeholder="Topic">
+                                </div>
+                                <div class="form-group">
+                                    <label for="week1Description">Description</label>
+                                    <textarea id="week1Description" name="week1Description" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addWeekBtn" class="btn-secondary">+ Add Week</button>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Grading Policy</h2>
+                        <div id="gradingContainer">
+                            <div class="grading-item">
+                                <div class="form-group">
+                                    <label for="grading1">Component</label>
+                                    <input type="text" id="grading1" name="grading1" placeholder="e.g., Assignments">
+                                </div>
+                                <div class="form-group">
+                                    <label for="grading1Percentage">Percentage</label>
+                                    <input type="number" id="grading1Percentage" name="grading1Percentage" min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addGradingBtn" class="btn-secondary">+ Add Grading Component</button>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Additional Information</h2>
+                        <div class="form-group">
+                            <label for="attendancePolicy">Attendance Policy</label>
+                            <textarea id="attendancePolicy" name="attendancePolicy" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="academicIntegrity">Academic Integrity Policy</label>
+                            <textarea id="academicIntegrity" name="academicIntegrity" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="accommodations">Accommodations</label>
+                            <textarea id="accommodations" name="accommodations" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="lateWorkPolicy">Late Work Policy</label>
+                            <textarea id="lateWorkPolicy" name="lateWorkPolicy" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="otherPolicies">Other Policies</label>
+                            <textarea id="otherPolicies" name="otherPolicies" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" id="generateBtn" class="btn-primary">Generate Syllabus</button>
+                        <button type="button" id="downloadBtn" class="btn-primary" disabled>Download as PDF</button>
+                        <button type="reset" class="btn-secondary">Reset Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="syllabusPreview" class="preview-container hidden">
+                <div class="preview-header">
+                    <h2>Syllabus Preview</h2>
+                    <button id="backToEditBtn" class="btn-secondary">Back to Edit</button>
+                </div>
+                <div id="syllabusContent" class="syllabus-content">
+                    <!-- Syllabus content will be generated here -->
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Course Syllabus Generator</p>
+        </footer>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

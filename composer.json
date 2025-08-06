@@ -1,0 +1,18 @@
+{
+    "name": "root/html",
+    "autoload": {
+        "psr-4": {
+            "Root\\Html\\": "src/"
+        }
+    },
+    "require": {
+        "phpoffice/phpword": "^1.2",
+        "smalot/pdfparser": "^2.10",
+        "stripe/stripe-php": "^15.4",
+        "spatie/pdf-to-text": "^1.52",
+        "pda/pheanstalk": "^5.0",
+        "tecnickcom/tcpdf": "^6.6",
+        "phpmailer/phpmailer": "^6.8",
+        "setasign/fpdf": "^1.8"
+    }
+}

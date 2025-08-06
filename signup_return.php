@@ -1,0 +1,1 @@
+Payment unsuccessful. Please try again at https://app.getgradegenie.com/signup.php

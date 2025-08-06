@@ -1,0 +1,628 @@
+/* Global Styles */
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --border-color: #dee2e6;
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: var(--primary-color);
+    color: white;
+    margin-bottom: 2rem;
+    border-radius: 0 0 10px 10px;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+/* Form Styles */
+.form-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.required {
+    color: #dc3545;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(74, 111, 165, 0.25);
+}
+
+/* Schedule and Grading Items */
+.schedule-item, .grading-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.schedule-item .form-group, .grading-item .form-group {
+    flex: 1;
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3a5a8c;
+}
+
+.btn-primary:disabled {
+    background-color: #a9b9cf;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+/* Preview Styles */
+.preview-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.preview-container.hidden {
+    display: none;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.syllabus-content {
+    padding: 2rem;
+    background-color: var(--light-color);
+    border-radius: 5px;
+}
+
+/* Syllabus Preview Styling */
+.syllabus-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.syllabus-header h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.syllabus-section {
+    margin-bottom: 2rem;
+}
+
+.syllabus-section h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.syllabus-section p {
+    margin-bottom: 0.75rem;
+}
+
+.schedule-table, .grading-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.schedule-table th, .schedule-table td,
+.grading-table th, .grading-table td {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+}
+
+.schedule-table th, .grading-table th {
+    background-color: var(--light-color);
+    text-align: left;
+}
+
+/* Footer */
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* Authentication and Subscription Styles */
+.user-account {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.user-account #user-name {
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    max-width: 550px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--secondary-color);
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: var(--danger-color);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.auth-logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.5rem;
+}
+
+.auth-header h1 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+    color: var(--dark-color);
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    justify-content: center;
+}
+
+.auth-tab {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--secondary-color);
+    transition: all 0.2s;
+}
+
+.auth-tab.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.login-subtitle {
+    color: var(--secondary-color);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.trial-banner {
+    background-color: rgba(13, 188, 149, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.trial-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.trial-banner h2 {
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+.trial-banner p {
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.benefits-list {
+    margin-bottom: 1.5rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.benefit-check {
+    color: var(--success-color);
+    font-weight: bold;
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.card-section {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+.card-section h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--dark-color);
+}
+
+.card-info {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.password-hint {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    margin-top: 0.25rem;
+}
+
+.secure-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin: 1rem 0;
+}
+
+.secure-icon {
+    margin-right: 0.5rem;
+}
+
+.terms {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.terms a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.error-message {
+    color: var(--danger-color);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    display: none;
+    background-color: rgba(220, 53, 69, 0.1);
+    padding: 0.75rem;
+    border-radius: 4px;
+    border-left: 3px solid var(--danger-color);
+}
+
+.notification {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 900;
+    max-width: 350px;
+}
+
+.notification-content {
+    background-color: var(--light-color);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.close-notification {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+/* Success and Trial Banners */
+.success-banner, .trial-ended-banner {
+    background-color: rgba(13, 188, 149, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.trial-ended-banner {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+.success-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.trial-info {
+    margin-bottom: 1.5rem;
+}
+
+.trial-date {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.date-label {
+    color: var(--secondary-color);
+}
+
+.date-value {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.trial-note {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Subscription details */
+.subscription-features {
+    margin-bottom: 1.5rem;
+}
+
+.subscription-features h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.subscription-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.price-badge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+.price-amount {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.price-period {
+    font-size: 1rem;
+    margin-left: 0.25rem;
+}
+
+.price-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.price-features li {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.price-features li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.success-message {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    text-decoration: underline;
+    display: block;
+    margin: 1rem auto;
+}
+
+/* Stripe Elements styling */
+#card-element, #subscription-card-element {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .schedule-item, .grading-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+    }
+}

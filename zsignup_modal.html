@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | GradeGenie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css?v=<?php echo rand(111111, 999999); ?>" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<style>
+body {
+    font-family: 'Albert Sans', sans-serif;
+}
+
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #5d5d5d;
+    width: 400px;
+    display: none;
+    z-index: 20000;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modalInput {
+    margin-top: 5px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modalButton {
+    background: #6f42c1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modalButton:hover {
+    background: #5a33a8;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.googleButton {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.googleButton:hover {
+    background: #f7f7f7;
+}
+
+.errorMessage {
+    color: red;
+    margin-bottom: 10px;
+}
+</style>
+<body>
+
+<div id="overlay" class="overlay" onclick="closeModal()"></div>
+
+<div id="signupModal" class="modal">
+    <button class="googleButton">Continue with Google</button>
+    <div class="errorMessage" id="errorMessage"></div>
+    <input type="text" id="firstName" class="modalInput" placeholder="First Name" required>
+    <input type="text" id="lastName" class="modalInput" placeholder="Last Name" required>
+    <input type="email" id="email" class="modalInput" placeholder="Email Address" required>
+    <input type="password" id="password" class="modalInput" placeholder="Password" required>
+    <input type="password" id="confirmPassword" class="modalInput" placeholder="Confirm Password" required>
+    <button class="modalButton" onclick="createAccount()">Create an Account</button>
+    <p>Already have an account? <a href="login.php">Log In</a></p>
+</div>
+
+<script>
+function openModal() {
+    $('#overlay').show();
+    $('#signupModal').show();
+}
+
+function closeModal() {
+    $('#overlay').hide();
+    $('#signupModal').hide();
+}
+
+function createAccount() {
+    var firstName = $('#firstName').val();
+    var lastName = $('#lastName').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var confirmPassword = $('#confirmPassword').val();
+
+    if (password !== confirmPassword) {
+        $('#errorMessage').text('Passwords do not match.');
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: 'api/register.php',
+        data: {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        },
+        success: function(response) {
+            if (response.success) {
+                closeModal();
+                alert('Account created successfully. Please log in.');
+                window.location.href = 'login.php';
+            } else {
+                $('#errorMessage').text(response.message);
+            }
+        },
+        error: function() {
+            $('#errorMessage').text('An error occurred while creating the account.');
+        }
+    });
+}
+</script>
+
+</body>
+</html>
