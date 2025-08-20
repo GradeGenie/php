@@ -7,12 +7,18 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Tests\\PhpOffice\\Math\\' => array($vendorDir . '/phpoffice/math/tests/Math'),
+    'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
     'Spatie\\PdfToText\\' => array($vendorDir . '/spatie/pdf-to-text/src'),
     'Root\\Html\\' => array($baseDir . '/src'),
+    'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'PhpOffice\\PhpWord\\' => array($vendorDir . '/phpoffice/phpword/src/PhpWord'),
     'PhpOffice\\Math\\' => array($vendorDir . '/phpoffice/math/src/Math'),
     'Pheanstalk\\' => array($vendorDir . '/pda/pheanstalk/src'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
+    'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
 );
